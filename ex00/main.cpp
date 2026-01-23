@@ -1,8 +1,4 @@
 #include "easyfind.hpp"
-#include <iostream>
-#include <vector>
-#include <list>
-#include <deque>
 
 void test_vector() {
 	std::cout << "Test vector" << std::endl;

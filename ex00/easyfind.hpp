@@ -2,11 +2,10 @@
 # define EASYFIND_HPP
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
 #include <list>
 #include <deque>
-#include <exception>
+#include <algorithm>
 
 class NotFoundException : public std::exception {
 	public:
