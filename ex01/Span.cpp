@@ -8,8 +8,8 @@ Span::Span(unsigned int N) : _N(N) {
 	_vec.reserve(N);
 }
 
-Span::Span(Span const &src) {
-	*this = src;
+Span::Span(Span const &copy) {
+	*this = copy;
 }
 
 Span::~Span() {}
@@ -46,36 +46,24 @@ void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterato
 }
 
 int Span::shortestSpan() {
-	try {
-		if (_vec.size() <= 1)
-			throw NotEnoughNumbersException();
-		std::vector<int> sorted = _vec;
-		std::sort(sorted.begin(), sorted.end());
-	
-		int minSpan = sorted[1] - sorted[0];
-		for (size_t i = 2; i < sorted.size(); i++) {
-			if (sorted[i] - sorted[i-1] < minSpan) {
-				minSpan = sorted[i] - sorted[i-1];
-			}
+	if (_vec.size() <= 1)
+		throw NotEnoughNumbersException();
+	std::vector<int> sorted = _vec;
+	std::sort(sorted.begin(), sorted.end());
+
+	int minSpan = sorted[1] - sorted[0];
+	for (size_t i = 2; i < sorted.size(); i++) {
+		if (sorted[i] - sorted[i-1] < minSpan) {
+			minSpan = sorted[i] - sorted[i-1];
 		}
-		return minSpan;
-	} 
-	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-		return -1;
 	}
+	return minSpan;
 }
 
 int Span::longestSpan() {
-	try {
-		if (_vec.size() <= 1)
-			throw NotEnoughNumbersException();
-		int min = *std::min_element(_vec.begin(), _vec.end());
-		int max = *std::max_element(_vec.begin(), _vec.end());
-		return max - min;
-	} 
-	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
-		return -1;
-	}
+	if (_vec.size() <= 1)
+		throw NotEnoughNumbersException();
+	int min = *std::min_element(_vec.begin(), _vec.end());
+	int max = *std::max_element(_vec.begin(), _vec.end());
+	return max - min;
 }
